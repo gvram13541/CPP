@@ -24,7 +24,7 @@ int main(){
     
     cout << "KEY\tVALUE\n";
     for(auto it = mp.begin(); it != mp.end(); it++){
-        cout << it -> first << "\t" << it -> second << endl;
+        cout << it -> first << "\t" << it -> second << endl; // ACCESSING THE ELEMENTS FROM THE MAP.
     }
     
     cout << "SIZE OF THE MAP IS: " << mp.size() << endl;  //TO FIND THE PRESENT SIZE OF THE MAP.
