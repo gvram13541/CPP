@@ -22,7 +22,12 @@ int main(){
     //     mp.insert(pair<int, int>(i, i*10)); // 3.INITIALIZATION OF MAP USING pair DATASTRUCTURE.
     // }
     
+//     map <int, int> mp = { {1,2}, {3,4}, {4, 5} }; // 4. INITILIZATION OF MAP.
     
+    map <int, int> mp = { {1,2}, {3,4}, {4, 5} }; // 5. INITILIZATION OF MAP.
+    
+//     map <int, int> mp;
+//     mp.insert(make_pair(5, 10)); // 6. INITILIZATION OF MAP USING MAKE PAIR. FLOWER BRACES CAN BE REPLACED BY MAKEPAIR FUNCTION.
     
     cout << "KEY\tVALUE\n";
     for(auto it = mp.begin(); it != mp.end(); it++){
