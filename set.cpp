@@ -31,7 +31,8 @@ int main(){
     //     cin >> c;
     //     s1.insert(c);  // 3.INITILIZATION OF THE SET.
     // }
-    
+    int a[] = {2, 5, 3, 7, 1};
+    set <int> s4(a, a+(size(a)/size(a[0]))); // 4.INITILIZATION OF THE SET.
     
     print(s1);  // 1. ACCESSING THE ELEMENTS FORM THE SET.
     
