@@ -152,6 +152,28 @@ class Linkedlist{
             ptr = ptr -> next;
         }
     }
+    
+    void reverseALinkedlist(){
+        Node *ptr1 = NULL;
+        Node *ptr2 = head;
+        Node *ptr3 = head -> next;
+        while(ptr2 != NULL){
+            ptr2 -> next = ptr1;
+            ptr1 = ptr2;
+            ptr2 = ptr3;
+            if(ptr3 != NULL)
+            ptr3 = ptr3 -> next;
+        }
+        cout << "head: " << ptr1 << endl; 
+        while(ptr1 != NULL){
+            cout << "[" << ptr1 -> data << "|";
+            ptr1 = ptr1 -> next;
+            if(ptr1 != NULL)
+            cout << ptr1 << "]" << " => ";
+            else
+            cout << ptr1 << "]\n";
+        }
+    }
 };
 
 int main(){
