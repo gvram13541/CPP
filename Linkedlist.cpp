@@ -60,6 +60,9 @@ int main(){
 // 2. singley linked list global head.
 
 #include <iostream>
+#include <unordered_map>
+#include <iterator>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Node{
@@ -174,6 +177,54 @@ class Linkedlist{
             cout << ptr1 << "]\n";
         }
     }
+    
+    void reverseKNodes(){
+        Node *ptr1 = head;
+        int K;
+        cin >> K;
+        while(ptr1 != NULL){
+            for(int i = K; i >= 1; i--){
+                Node *ptr2 = ptr1;
+                for(int j = 1; j < i; j++){
+                    ptr2 = ptr2 -> next;
+                }
+                int temp = ptr1 -> data;
+                ptr1 -> data = ptr2 ->data;
+                ptr2 -> data = temp;
+            }
+            for(int i = 1; i <= K; i++)
+            ptr1 = ptr1 -> next;
+        }
+    }
+    
+    void makeCylcle(int pos){
+        Node *temp = head;
+        Node *starthead = NULL;
+        int count = 1;
+        while(temp -> next != NULL){
+            if(count == pos)
+            starthead = temp;
+            temp = temp -> next;
+            count++;
+        }
+        temp -> next = starthead;
+    }
+    
+    bool detectCylcle(){
+        Node *ptr = head;
+        unordered_map <string, int> mp;
+        while(ptr -> next != NULL){
+            ostringstream address;
+            address << ptr;
+            mp[address.str()]++;
+            ptr = ptr -> next;
+            for(auto it = mp.begin(); it != mp.end(); it++){
+                if(it -> second >= 2)
+                return true;
+            }
+        }
+        return false;
+    }
 };
 
 int main(){
@@ -183,6 +234,9 @@ int main(){
     list1.insertAtEnd(3);
     list1.insertAtEnd(4);
     list1.insertAtEnd(5);
+    list1.insertAtEnd(6);
+    list1.insertAtEnd(7);
+    list1.insertAtEnd(8);
     list1.displayLinkedlist();
     if(list1.search(5))
     cout << "Found" << endl;
@@ -199,15 +253,23 @@ int main(){
     list1.displayLinkedlist();
     cout << "No.Of Nodes: " << list1.lengthOfLinkedList() << endl;
     cout << endl << endl;
-    
-    Linkedlist list2;
-    list2.insertAtEnd(6);
-    list2.insertAtEnd(7);
-    list2.insertAtEnd(8);
-    list2.insertAtEnd(9);
-    list2.insertAtEnd(10);
-    list2.displayLinkedlist();
-    list1.mergeLinkedlist(list2);
+    // list1.reverseALinkedlist();
+    // list1.reverseKNodes();
+    // list1.displayLinkedlist();
+    list1.makeCylcle(3);
+    // list1.displayLinkedlist();
+    cout << list1.detectCylcle() << endl;
+    list1.deleteCylcle();
     list1.displayLinkedlist();
+    
+    // Linkedlist list2;
+    // list2.insertAtEnd(6);
+    // list2.insertAtEnd(7);
+    // list2.insertAtEnd(8);
+    // list2.insertAtEnd(9);
+    // list2.insertAtEnd(10);
+    // list2.displayLinkedlist();
+    // list1.mergeLinkedlist(list2);
+    // list1.displayLinkedlist();
     return 0;
 }
