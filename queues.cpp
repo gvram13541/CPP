@@ -99,3 +99,69 @@ int main(){
     cout << "The top element is: " << dq.top() << endl;           // VIEWING THE TOP ELEMENT.
     return 0;
 }
+
+
+                        // <<<<<<<<<<<-------------- IMPLEMENTATION OF QUEUES USING STACKS ------------->>>>>>>>>>> //
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Queue {
+    stack<int> input, output;
+public:
+
+    void enqueue(int x) {
+        input.push(x);
+    }
+
+    int dequeue() {
+        int val;
+        
+        if(input.empty())
+        return -1;
+        
+        while(!input.empty()){
+            val = input.top();
+            input.pop();
+            if(!input.empty())
+            output.push(val);
+        }
+        
+        while(!output.empty()){
+            int temp = output.top();
+            input.push(temp);
+            output.pop();
+        }
+        
+        return val;
+    }
+};
+
+int main()
+{
+    int T;
+    cin>>T;
+    while(T--)
+    {
+        Queue ob;
+
+        int Q;
+        cin>>Q;
+        while(Q--){
+        int QueryType=0;
+        cin>>QueryType;
+        if(QueryType==1)
+        {
+            int a;
+            cin>>a;
+            ob.enqueue(a);
+        }
+        else if(QueryType==2)
+        {
+            cout<<ob.dequeue()<<" ";
+
+        }
+        }
+    cout<<endl;
+    }
+}
