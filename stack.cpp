@@ -21,3 +21,72 @@ int main(){
     print(s);
     return 0;
 }
+
+                      // <<< ----------------- IMPLEMENTATION OF STACK USING TWO QUEUES ----------------- >>> //
+
+#include <iostream>
+#include <queue>
+
+class Stack{
+    queue <int> q1;
+    queue <int> q2;
+    
+    public:
+    void Push(int x){
+        q1.push(x);
+    }
+    
+    int Pop(){
+        int val;
+        
+       if(q1.empty())
+           return -1;
+        
+        while(!q1.empty()){
+            val = q1.front();
+            q1.pop();
+            if(!q1.empty())
+            q2.push(val);
+        }
+        
+        while(!q2.empty()){
+            int temp = q2.front();
+            q1.push(temp);
+            q2.pop();
+        }
+        
+        return val;
+    }
+    
+};
+
+int main(){
+    Stack s;
+    int x, ans;
+    
+    cout << "Enter the operation you wanna perform\n";
+    cout << "1.PUSH\n2.POP\n";
+    
+    int choice;
+    cin >> choice;
+    
+    switch(choice){
+        case 1:
+            cout << "Enter the value to pushed\n";
+            cin >> x;
+            s.Push(x);
+        break;
+     
+        case 2:
+            ans = s.Pop();
+            cout << "The value popped is " << ans << ".\n";
+        break;
+       
+        default:
+            cout << "Invalid choice.\n";
+    }
+    
+    return 0;
+}
+    
+    
