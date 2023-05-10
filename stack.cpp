@@ -254,3 +254,124 @@ class Solution {
     }
     
 };
+
+                                // <<< ----------------- PREFIX TO INFIX CONVERSION ----------------- >>> //
+
+class Solution {
+  public:
+    string preToInfix(string pre_exp) {
+        string prefix = "", infix = "";
+        stack <string> s;
+        
+        reverse(pre_exp.begin(), pre_exp.end());
+        prefix = pre_exp;
+        
+        for(int i = 0; i < prefix.length(); i++){
+            if(isalpha(prefix[i]) || isdigit(prefix[i]))
+            s.push(string(1, prefix[i]));
+            
+            else{
+                string s1 = s.top();
+                s.pop();
+                string s2 = s.top();
+                s.pop();
+                string res = "(" + s1 + prefix[i] + s2 + ")";  // THIS LINE SOME TIMES INCREASES THE TIME COMPLEXTIY OF THE CODE.
+                                                               // SO BETTER AVOID CREATING UNNESSARY STRING VARIABELES IN THE CODE
+                s.push(res);                                   // AND FOLLOW THE STEPS SHOWN IN POSTFIX TO INFIX CONVERSION CODE.
+            }
+        }
+        
+        infix = s.top();
+        
+        return infix;
+    }
+};
+
+
+                                // <<< ----------------- POSTFIX TO INFIX CONVERSION ----------------- >>> //
+
+class Solution {
+  public:
+    string postToInfix(string postfix) {
+        stack <string> s;
+        
+        for(int i = 0; i < postfix.length(); i++){
+            if(isalpha(postfix[i]) || isdigit(postfix[i]))
+            s.push(string(1, postfix[i]));
+            
+            else{
+                string s1 = s.top();
+                s.pop();
+                string s2 = s.top();
+                s.pop();
+                s.push("(" + s2 + postfix[i] + s1 + ")");
+            }
+        }
+        
+        return s.top();
+    }
+};
+
+
+                                // <<< ----------------- POSTFIX TO PREFIX CONVERSION ----------------- >>> //
+
+class Solution {
+  public:
+    string postToPre(string postfix) {
+        // Write your code here
+        stack <string> s;
+    
+        for(int i = 0; i < postfix.length(); i++){
+            if(isalpha(postfix[i]) || isdigit(postfix[i]))
+            s.push(string(1, postfix[i]));
+            
+            else{
+                string s1, s2;
+                if(!s.empty()){
+                    s1 = s.top();
+                    s.pop();
+                }
+                if(!s.empty()){
+                    s2 = s.top();
+                    s.pop();
+                }
+                s.push(s1 + s2 + postfix[i]);
+            }
+        }
+        
+        string ans = s.top();
+        
+        reverse(ans.begin(), ans.end());
+        
+        return ans;
+
+    }
+};
+
+
+
+                                // <<< ----------------- POSTFIX TO INFIX CONVERSION ----------------- >>> //
+
+class Solution {
+  public:
+    string preToPost(string pre_exp) {
+        stack <string> s;
+        
+        reverse(pre_exp.begin(), pre_exp.end());
+
+        for(int i = 0; i < pre_exp.length(); i++){
+            if(isalpha(pre_exp[i]) || isdigit(pre_exp[i]))
+            s.push(string(1, pre_exp[i]));
+            
+            else{
+                string s1 = s.top();
+                s.pop();
+                string s2 = s.top();
+                s.pop();
+                s.push(s1 + s2 + pre_exp[i]);                                  
+            }
+        }
+        
+        return s.top();
+    }
+};
