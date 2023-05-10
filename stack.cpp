@@ -90,3 +90,167 @@ int main(){
 }
     
     
+                                // <<< ----------------- INFIX TO POSTFIX CONVERSION ----------------- >>> //
+
+class Solution {
+  public:
+    int getPriority(char c){
+        switch(c){
+            case '+':
+            case '-':
+            return 1;
+            break;
+            
+            case '*':
+            case '/':
+            case '%':
+            return 2;
+            break;
+            
+            case '^':
+            return 3;
+            break;
+            
+            default:
+            return 0;
+            
+            return 0;
+        }
+    }
+    string infixToPostfix(string S) {
+        // Your code here
+        string infix = S ,postfix = "";
+        stack <char> s;
+        
+        for(int i = 0; i < infix.size(); i++){
+            if(isalpha(infix[i]) || isdigit(infix[i]))
+            postfix += infix[i];
+            
+            else if(infix[i] == '(')
+            s.push(infix[i]);
+            
+            else if(infix[i] == '+'||infix[i] == '-'||infix[i] == '*'||infix[i] == '/'||infix[i] == '%'||infix[i] == '^'){
+                    while(!s.empty() && (getPriority(s.top()) >= getPriority(infix[i]))){
+                        postfix += s.top();
+                        if(!s.empty())
+                        s.pop();
+                    }
+                s.push(infix[i]);
+            }
+            
+            else if(infix[i] == ')'){
+                while(s.top() != '('){
+                    postfix += s.top();
+                    if(!s.empty())
+                    s.pop();
+                }
+                
+                if(!s.empty())
+                s.pop();
+            }
+        }
+        
+        while(!s.empty()){
+            postfix += s.top();
+            if(!s.empty())
+            s.pop();
+        }
+        
+        return postfix;
+    }
+    
+};
+
+
+                                // <<< ----------------- INFIX TO POSTFIX CONVERSION ----------------- >>> //
+
+class Solution {
+  public:
+    int getPriority(char c){
+        switch(c){
+            case '+':
+            case '-':
+            return 1;
+            break;
+            
+            case '*':
+            case '/':
+            case '%':
+            return 2;
+            break;
+            
+            case '^':
+            return 3;
+            break;
+            
+            default:
+            return 0;
+            
+            return 0;
+        }
+    }
+    string infixToPrefix(string S) {
+        // Your code here
+        
+        string infix = "" ,postfix = "", prefix = "";
+        stack <char> s;
+        
+        for(int i = S.length()-1; i >= 0; i--){
+            if(S[i] == '(')
+                infix += ')';
+            else if(S[i] == ')')
+                infix += '(';
+            else
+            infix += S[i];
+        }
+        
+        for(int i = 0; i < infix.size(); i++){
+            if(isalpha(infix[i]) || isdigit(infix[i]))
+            postfix += infix[i];
+            
+            else if(infix[i] == '(')
+            s.push(infix[i]);
+            
+            else if(infix[i] == '^'){
+                while(!s.empty() && (getPriority(s.top()) >= getPriority(infix[i]))){
+                        postfix += s.top();
+                        if(!s.empty())
+                        s.pop();
+                    }
+                s.push(infix[i]);
+            }
+            
+            else if(infix[i] == '+'||infix[i] == '-'||infix[i] == '*'||infix[i] == '/'||infix[i] == '%'){
+                    while(!s.empty() && (getPriority(s.top()) > getPriority(infix[i]))){
+                        postfix += s.top();
+                        if(!s.empty())
+                        s.pop();
+                    }
+                s.push(infix[i]);
+            }
+            
+            else if(infix[i] == ')'){
+                while(s.top() != '('){
+                    postfix += s.top();
+                    if(!s.empty())
+                    s.pop();
+                }
+                
+                if(!s.empty())
+                s.pop();
+            }
+        }
+        
+        while(!s.empty()){
+            postfix += s.top();
+            if(!s.empty())
+            s.pop();
+        }
+       
+        reverse(postfix.begin(), postfix.end());
+        prefix = postfix;
+        
+        return prefix;
+    }
+    
+};
