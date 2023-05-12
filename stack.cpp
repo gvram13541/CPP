@@ -88,6 +88,9 @@ int main(){
     
     return 0;
 }
+
+// WE CAN IMPLEMENT STACK USING ONLY ONE QUEUE. TRY THIS APPROACH. 
+// INTIUTION IS WHEN EVER PUSHING RUN A LOOP of size-1 AND PUSH AND POP FRONT ELEMENTS OF THE QUEUE.
     
     
                                 // <<< ----------------- INFIX TO POSTFIX CONVERSION ----------------- >>> //
